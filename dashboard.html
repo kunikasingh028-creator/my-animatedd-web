@@ -3,73 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Utility Dashboard | Kunika</title>
+    <title>Professional Dashboard | Kunika</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #09090b; --card: #18181b; --accent: #3b82f6; --text: #fafafa; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px; }
-        .dashboard-wrapper { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .card { background: var(--card); border: 1px solid #27272a; border-radius: 16px; padding: 24px; }
-        .welcome-card { grid-column: span 2; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to right, #1e40af, #3b82f6); }
-        .logout-btn { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .icon-item { display: flex; align-items: center; gap: 15px; margin-top: 15px; background: #27272a; padding: 12px; border-radius: 12px; }
-        .icon-item img { width: 35px; height: 35px; }
-        #time { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
-        textarea { width: 100%; height: 150px; background: #09090b; border: 1px solid #27272a; border-radius: 10px; color: #d4d4d8; padding: 15px; resize: none; margin-top: 10px; outline: none; }
+        .wrapper { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card { background: var(--card); border: 1px solid #27272a; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .welcome { grid-column: span 2; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1e3a8a, #3b82f6); border: none; }
+        .logout-btn { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .logout-btn:hover { background: #ef4444; border-color: #ef4444; transform: translateY(-2px); }
+        .status-box { display: flex; align-items: center; gap: 15px; margin-top: 15px; background: #27272a; padding: 12px; border-radius: 12px; }
+        .emoji { font-size: 24px; }
+        #time { font-size: 2.5rem; font-weight: 700; color: var(--accent); letter-spacing: -1px; }
+        textarea { width: 100%; height: 160px; background: #09090b; border: 1px solid #27272a; border-radius: 12px; color: #d4d4d8; padding: 15px; resize: none; margin-top: 10px; outline: none; font-size: 1rem; }
+        @media (max-width: 768px) { .wrapper { grid-template-columns: 1fr; } .welcome { grid-column: span 1; } }
     </style>
 </head>
 <body>
 
-<div class="dashboard-wrapper">
-    <div class="card welcome-card">
+<div class="wrapper">
+    <div class="card welcome">
         <div>
-            <h1>Hello, Kunika! 👋</h1>
-            <p>Your workspace is updated and ready.</p>
+            <h1>Welcome, Kunika! 👋</h1>
+            <p style="opacity: 0.9;">Everything looks good today.</p>
         </div>
         <button class="logout-btn" onclick="location.href='/my-animatedd-web/index.html'">Sign Out</button>
     </div>
 
-    <div class="card" style="text-align: center;">
+    <div class="card" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
         <div id="time">00:00:00</div>
-        <p id="date" style="color: #a1a1aa; font-size: 0.8rem;"></p>
+        <p id="date" style="color: #a1a1aa; font-size: 0.85rem; margin-top: 5px;"></p>
     </div>
 
     <div class="card" style="grid-column: span 2;">
         <h3>📓 Quick Notes</h3>
-        <textarea id="noteArea" placeholder="Type your ideas here..."></textarea>
+        <textarea id="noteArea" placeholder="Start typing... Your notes are saved automatically."></textarea>
     </div>
 
     <div class="card">
-        <h3>🚀 Online Status</h3>
-        <div class="icon-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/1067/1067555.png" alt="Server">
-            <span>Server: Active</span>
+        <h3>🚀 System Status</h3>
+        <div class="status-box">
+            <span class="emoji">📡</span>
+            <span>Network: Stable</span>
         </div>
-        <div class="icon-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/702/702455.png" alt="Database">
-            <span>Data: Syncing</span>
+        <div class="status-box">
+            <span class="emoji">🛡️</span>
+            <span>Security: Active</span>
+        </div>
+        <div class="status-box">
+            <span class="emoji">✅</span>
+            <span>Database: Synced</span>
         </div>
     </div>
 </div>
 
 <script>
+    // 1. Digital Clock Logic
     function updateClock() {
         const now = new Date();
-        document.getElementById('time').innerText = now.toLocaleTimeString();
-        document.getElementById('date').innerText = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('time').innerText = now.toLocaleTimeString([], { hour12: false });
+        document.getElementById('date').innerText = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
     }
     setInterval(updateClock, 1000);
     updateClock();
 
+    // 2. Auto-Save Notes Logic
     const noteArea = document.getElementById('noteArea');
-    noteArea.value = localStorage.getItem('user_notes') || "";
+    noteArea.value = localStorage.getItem('kunika_notes') || "";
     noteArea.addEventListener('input', () => {
-        localStorage.setItem('user_notes', noteArea.value);
+        localStorage.setItem('kunika_notes', noteArea.value);
     });
 </script>
 
 </body>
 </html>
-
-
