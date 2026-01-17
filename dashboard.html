@@ -3,161 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Dashboard | Kunika</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Utility Dashboard | Kunika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        
-        body {
-            background: #0f172a; /* Dark Space Theme */
-            background-image: radial-gradient(circle at 20% 30%, #1e293b 0%, #0f172a 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
+        :root { --bg: #09090b; --card: #18181b; --accent: #3b82f6; --text: #fafafa; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px; }
 
-        /* Floating Dashboard Container */
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
+        .dashboard-wrapper { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
-        /* Top Bar */
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
+        /* Clock Card */
+        .card { background: var(--card); border: 1px solid #27272a; border-radius: 16px; padding: 24px; transition: 0.3s; }
+        .clock-card { grid-column: span 1; text-align: center; }
+        #time { font-size: 2.5rem; font-weight: 700; color: var(--accent); }
+        #date { color: #a1a1aa; margin-top: 5px; }
 
-        .logo { font-size: 24px; font-weight: 700; color: #38bdf8; text-shadow: 0 0 10px #38bdf866; }
+        /* Welcome Card */
+        .welcome-card { grid-column: span 2; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to right, #1e40af, #3b82f6); }
+        .logout-btn { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
 
-        .logout-btn {
-            padding: 10px 20px;
-            background: rgba(255, 75, 43, 0.1);
-            border: 1px solid #ff4b2b;
-            color: #ff4b2b;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .logout-btn:hover { background: #ff4b2b; color: white; box-shadow: 0 0 20px rgba(255, 75, 43, 0.4); }
+        /* Notes Area - VERY USEFUL */
+        .notes-card { grid-column: span 2; }
+        textarea { width: 100%; height: 200px; background: transparent; border: none; color: #d4d4d8; resize: none; outline: none; font-size: 1rem; line-height: 1.6; }
 
-        /* Bento Grid Design */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 20px;
-        }
+        /* To-Do List */
+        .todo-card { grid-column: span 1; }
+        .input-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        input { flex: 1; background: #27272a; border: none; padding: 10px; border-radius: 8px; color: white; }
+        .add-btn { background: var(--accent); border: none; padding: 10px; border-radius: 8px; color: white; cursor: pointer; }
+        .task-item { display: flex; justify-content: space-between; background: #27272a; padding: 10px; margin-bottom: 8px; border-radius: 8px; font-size: 0.9rem; }
 
-        .bento-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .welcome-card { grid-column: span 2; background: linear-gradient(90deg, #38bdf8, #818cf8); color: #0f172a; }
-
-        /* To-Do Styling */
-        .todo-box input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px;
-            border-radius: 10px;
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .add-task-btn {
-            width: 100%;
-            padding: 10px;
-            background: #38bdf8;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .task-list { margin-top: 20px; }
-        .task-item {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .delete-btn { color: #f87171; cursor: pointer; }
-
-        /* Stats Section */
-        .stats-item { margin-bottom: 15px; }
-        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 5px; }
-        .progress-fill { height: 100%; background: #38bdf8; border-radius: 10px; width: 65%; }
-
-        @media (max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } .welcome-card { grid-column: span 1; } }
+        @media (max-width: 768px) { .dashboard-wrapper { grid-template-columns: 1fr; } .welcome-card, .notes-card { grid-column: span 1; } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <nav class="top-nav">
-        <div class="logo">KUNIKA OS v1.0</div>
-        <button class="logout-btn" onclick="location.href='../index.html'">SYSTEM SHUTDOWN</button>
-    </nav>
-
-    <div class="grid-layout">
-        <div class="bento-card welcome-card">
-            <h1>Welcome back, Kunika!</h1>
-            <p>Your creative workspace is ready. You have 3 pending tasks for today.</p>
+<div class="dashboard-wrapper">
+    <div class="card welcome-card">
+        <div>
+            <h1>Hello, Kunika!</h1>
+            <p>Ready to crush your goals today?</p>
         </div>
+        <button class="logout-btn" onclick="location.href='../index.html'">Sign Out</button>
+    </div>
 
-        <div class="bento-card todo-box">
-            <h3>Quick Tasks</h3><br>
-            <input type="text" id="taskIn" placeholder="Enter new goal...">
-            <button class="add-task-btn" onclick="newTask()">Push to List</button>
-            <div id="list" class="task-list"></div>
-        </div>
+    <div class="card clock-card">
+        <div id="time">00:00:00</div>
+        <div id="date">Loading Date...</div>
+    </div>
 
-        <div class="bento-card">
-            <h3>System Status</h3><br>
-            <div class="stats-item">
-                <span>Deployment Integrity</span>
-                <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
-            </div>
-            <div class="stats-item">
-                <span>Google Indexing</span>
-                <div class="progress-bar"><div class="progress-fill" style="width: 40%; background: #facc15;"></div></div>
-            </div>
-            <div class="stats-item">
-                <span>SEO Score</span>
-                <div class="progress-bar"><div class="progress-fill" style="width: 80%; background: #4ade80;"></div></div>
-            </div>
+    <div class="card notes-card">
+        <h3>📓 Quick Notes (Auto-Saves)</h3>
+        <hr style="border: 0.5px solid #27272a; margin: 15px 0;">
+        <textarea id="noteArea" placeholder="Start typing your ideas or links here..."></textarea>
+    </div>
+
+    <div class="card todo-card">
+        <h3>✅ Focus List</h3><br>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="New task...">
+            <button class="add-btn" onclick="addTask()">+</button>
         </div>
+        <div id="taskList"></div>
     </div>
 </div>
 
 <script>
-    function newTask() {
-        let input = document.getElementById('taskIn');
-        let val = input.value;
-        if(val) {
-            let div = document.createElement('div');
+    // 1. Digital Clock
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('time').innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+        document.getElementById('date').innerText = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 2. Auto-Saving Notes
+    const noteArea = document.getElementById('noteArea');
+    noteArea.value = localStorage.getItem('user_notes') || "";
+    noteArea.addEventListener('input', () => {
+        localStorage.setItem('user_notes', noteArea.value);
+    });
+
+    // 3. Task Manager
+    function addTask() {
+        const input = document.getElementById('taskInput');
+        if(input.value) {
+            const div = document.createElement('div');
             div.className = 'task-item';
-            div.innerHTML = `<span>${val}</span><span class="delete-btn" onclick="this.parentElement.remove()">REMOVE</span>`;
-            document.getElementById('list').appendChild(div);
+            div.innerHTML = `<span>${input.value}</span><span style="color:#ef4444; cursor:pointer;" onclick="this.parentElement.remove()">✕</span>`;
+            document.getElementById('taskList').appendChild(div);
             input.value = '';
         }
     }
