@@ -2,96 +2,21 @@
 <html lang="en">
 
 <head>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-   <meta name="google-site-verification" content="RRgae2MupJBypl7N9l_8V9i8VEPqQJDnTw7BswEbYoM" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Kunika Singh | Professional Animated Web</title>
-<meta name="title" content="Kunika Singh | Professional Animated Web">
-<meta name="description" content="Welcome to Kunika Singh's official portal. This is a modern animated login and registration system.">
-<meta name="keywords" content="Kunika Singh, Kunika Singh Animated Web, Kunika Singh Login, my-animatedd-web">
-   
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-   <meta name="description" content="Kunikas Special Animated Login and Register Page - A secure and stylish portal for user authentication.">
-<meta name="keywords" content="login page, animated login form, Kunika, GitHub Pages, web development">
-    <head>
-        <title>My Unique Login App</title>
-        <meta name="description" content="Safe and secure login and registration system for everyone.">
-        <meta name="keywords" content="Login, Signup, Firebase, Web App, MyLoginApp">
-        <meta name="google-site-verification" content="iJYnk6gtN70zEC8bEmNtvYCD47HjauUctD2s3_cs4IE" />
-        
-        <link rel="stylesheet" href="LOGIN/style.css">
-    </head>
+    <title>Kunika Singh | Professional Animated Web</title>
+    
+    <meta name="title" content="Kunika Singh | Professional Animated Web">
+    <meta name="description" content="Welcome to Kunika Singh's official portal. This is a modern animated login and registration system.">
+    <meta name="keywords" content="Kunika Singh, Kunika Singh Animated Web, Kunika Singh Login, my-animatedd-web">
+    <meta name="google-site-verification" content="RRgae2MupJBypl7N9l_8V9i8VEPqQJDnTw7BswEbYoM" />
+    <meta name="google-site-verification" content="iJYnk6gtN70zEC8bEmNtvYCD47HjauUctD2s3_cs4IE" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <link rel="stylesheet" href="LOGIN/style.css">
 </head>
-<script type="module">
-    // 1. Firebase ki zaroori cheezein mangwana
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    // 2. Aapka Firebase Configuration (Ise mat badalna)
-    const firebaseConfig = {
-        apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
-        authDomain: "myloginapp-2004.firebaseapp.com",
-        projectId: "myloginapp-2004",
-        storageBucket: "myloginapp-2004.firebasestorage.app",
-        messagingSenderId: "131970738070",
-        appId: "1:131970738070:web:f0f2ead47db9381cbadfb7",
-        measurementId: "G-DBLVKXJKLH"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // --- 3. UI Toggle Logic (Aapka Purana Code) ---
-    const container = document.getElementById('container');
-    const registerBtn = document.getElementById('register');
-    const loginBtn = document.getElementById('login');
-
-    registerBtn.addEventListener('click', () => {
-        container.classList.add("active");
-    });
-
-    loginBtn.addEventListener('click', () => {
-        container.classList.remove("active");
-    });
-
-    // --- 4. LOGIN LOGIC ---
-    const signInForm = document.querySelector('.sign-in form');
-    if (signInForm) {
-        signInForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // HTML mein jo naya email box banaya hai uski value lena
-            const email = signInForm.querySelector('input[type="email"]').value;
-            const password = signInForm.querySelector('input[type="password"]').value;
-
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    alert("Login Successful!");
-                    window.location.href = "dashboard.html"; // Naye page par bhejna
-                })
-                .catch((error) => {
-                    alert("Login Fail: " + error.message);
-                });
-        });
-    }
-
-    // --- 5. REGISTER LOGIC ---
-    const signUpForm = document.querySelector('.sign-up form');
-    if (signUpForm) {
-        signUpForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = signUpForm.querySelector('input[type="email"]').value;
-            const password = signUpForm.querySelector('input[type="password"]').value;
-
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    alert("Account Created! Now Login.");
-                    container.classList.remove("active"); // Wapis login page par le jana
-                })
-                .catch((error) => alert("Registration Error: " + error.message));
-        });
-    }
-</script>
 
 <body>
     <div class="container" id="container">
@@ -107,17 +32,18 @@
                     <i class='bx bxs-envelope'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" placeholder="Password" id="reg-password" required>
                     <i class='bx bxs-lock-alt'></i>
+                    <i class="fa-solid fa-eye-slash" id="toggleRegPassword" style="right: 45px; cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);"></i>
                 </div>
                 <button type="submit">Register</button>
                 <p>or register with social platforms</p>
                 <div class="social-icons">
-    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="#"><i class="fa-brands fa-google"></i></a>
-    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-</div>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-google"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
             </form>
         </div>
 
@@ -125,25 +51,23 @@
             <form>
                 <h1>Login</h1>
                 <div class="input-box">
-                    <input type="email" placeholder="Username" required>
+                    <input type="email" placeholder="Email" required>
                     <i class='bx bxs-user'></i>
                 </div>
-               <div class="input-box">
-    <input type="password" placeholder="Password" id="password" required>
-    
-    <i class='bx bxs-lock-alt'></i>
-    
-    <i class="fa-solid fa-eye-slash" id="togglePassword" style="right: 45px; cursor: pointer;"></i>
-</div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="login-password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class="fa-solid fa-eye-slash" id="toggleLoginPassword" style="right: 45px; cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);"></i>
+                </div>
                 <a href="#">Forgot Password?</a>
                 <button type="submit">Login</button>
                 <p>or login with social platforms</p>
-              <div class="social-icons">
-    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="#"><i class="fa-brands fa-google"></i></a>
-    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-</div>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-google"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
             </form>
         </div>
 
@@ -162,19 +86,69 @@
             </div>
         </div>
     </div>
-    <script src="java.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
+            authDomain: "myloginapp-2004.firebaseapp.com",
+            projectId: "myloginapp-2004",
+            storageBucket: "myloginapp-2004.firebasestorage.app",
+            messagingSenderId: "131970738070",
+            appId: "1:131970738070:web:f0f2ead47db9381cbadfb7",
+            measurementId: "G-DBLVKXJKLH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // UI Toggle Logic
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+
+        registerBtn.addEventListener('click', () => container.classList.add("active"));
+        loginBtn.addEventListener('click', () => container.classList.remove("active"));
+
+        // Eye Icon Logic Function
+        function setupEyeIcon(buttonId, inputId) {
+            const btn = document.getElementById(buttonId);
+            const input = document.getElementById(inputId);
+            if(btn && input) {
+                btn.addEventListener('click', function() {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+        }
+        setupEyeIcon('toggleLoginPassword', 'login-password');
+        setupEyeIcon('toggleRegPassword', 'reg-password');
+
+        // Login Logic
+        const signInForm = document.querySelector('.sign-in form');
+        signInForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signInForm.querySelector('input[type="email"]').value;
+            const password = signInForm.querySelector('input[type="password"]').value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => { alert("Login Successful!"); window.location.href = "dashboard.html"; })
+                .catch((error) => alert("Login Fail: " + error.message));
+        });
+
+        // Register Logic
+        const signUpForm = document.querySelector('.sign-up form');
+        signUpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signUpForm.querySelector('input[type="email"]').value;
+            const password = signUpForm.querySelector('input[type="password"]').value;
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => { alert("Account Created! Now Login."); container.classList.remove("active"); })
+                .catch((error) => alert("Registration Error: " + error.message));
+        });
+    </script>
 </body>
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
