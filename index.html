@@ -1,120 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunika Singh | Zenitsu Login</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
-    <link rel="stylesheet" href="style.css">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunika Singh | Zenitsu Login</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="vignette-overlay"></div>
-    <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form id="signup-form">
-                <h1>Registration</h1>
-                <div class="input-box">
-                    <input type="text" placeholder="Username" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="email" placeholder="Email" required>
-                    <i class='bx bxs-envelope'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" id="reg-password" required>
-                    <i class='bx bxs-lock-alt'></i>
-                    <i class="fa-solid fa-eye-slash" id="toggleRegPassword"></i>
-                </div>
-                <button type="submit">Register</button>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-google"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
-            </form>
-        </div>
+    <div class="vignette-overlay"></div>
+    <div class="container" id="container">
+        
+        <div class="form-container sign-up">
+            <form id="signup-form">
+                <h1>Registration</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" required>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="reg-password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class="fa-solid fa-eye-slash" id="toggleRegPassword"></i>
+                </div>
+                <button type="submit">Register</button>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-google"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </form>
+        </div>
 
-        <div class="form-container sign-in">
-            <form id="signin-form">
-                <h1>Login</h1>
-                <div class="input-box">
-                    <input type="email" placeholder="Email" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" id="login-password" required>
-                    <i class='bx bxs-lock-alt'></i>
-                    <i class="fa-solid fa-eye-slash" id="toggleLoginPassword"></i>
-                </div>
-                <a href="#">Forgot Password?</a>
-                <button type="submit">Login</button>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-google"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
-            </form>
-        </div>
+        <div class="form-container sign-in">
+            <form id="signin-form">
+                <h1>Login</h1>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="login-password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class="fa-solid fa-eye-slash" id="toggleLoginPassword"></i>
+                </div>
+                <a href="#">Forgot Password?</a>
+                <button type="submit">Login</button>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-google"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </form>
+        </div>
 
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Log in to access your dashboard.</p>
-                    <button id="login">Login</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Hello!</h1>
-                    <p>New here? Register to get started.</p>
-                    <button id="register">Register</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Log in to access your dashboard.</p>
+                    <button id="login">Login</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello!</h1>
+                    <p>New here? Register to get started.</p>
+                    <button id="register">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
-            authDomain: "myloginapp-2004.firebaseapp.com",
-            projectId: "myloginapp-2004",
-            storageBucket: "myloginapp-2004.firebasestorage.app",
-            messagingSenderId: "131970738070",
-            appId: "1:131970738070:web:f0f2ead47db9381cbadfb7"
-        };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
+            authDomain: "myloginapp-2004.firebaseapp.com",
+            projectId: "myloginapp-2004",
+            storageBucket: "myloginapp-2004.firebasestorage.app",
+            messagingSenderId: "131970738070",
+            appId: "1:131970738070:web:f0f2ead47db9381cbadfb7"
+        };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-        const container = document.getElementById('container');
-        const registerBtn = document.getElementById('register');
-        const loginBtn = document.getElementById('login');
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
 
-        registerBtn.addEventListener('click', () => container.classList.add("active"));
-        loginBtn.addEventListener('click', () => container.classList.remove("active"));
+        // Page Switch Logic
+        registerBtn.addEventListener('click', () => {
+            container.classList.add("active");
+        });
 
-        // Login Logic with Dashboard Link
-        const signInForm = document.getElementById('signin-form');
-        signInForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = signInForm.querySelector('input[type="email"]').value;
-            const password = signInForm.querySelector('input[type="password"]').value;
-            
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => { 
-                    alert("Login Success! Opening Dashboard...");
-                    window.location.href = "dashboard.html"; // <-- Link to your file
-                })
-                .catch((error) => alert("Login Fail: " + error.message));
-        });
-    </script>
+        loginBtn.addEventListener('click', () => {
+            container.classList.remove("active");
+        });
+
+        // Login Logic with Dashboard Link
+        const signInForm = document.getElementById('signin-form');
+        signInForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signInForm.querySelector('input[type="email"]').value;
+            const password = signInForm.querySelector('input[type="password"]').value;
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => { 
+                    alert("Login Success! Opening Dashboard...");
+                    window.location.href = "dashboard.html"; // <-- Yahan link hai
+                })
+                .catch((error) => alert("Login Fail: " + error.message));
+        });
+
+        // Registration Logic
+        const signUpForm = document.getElementById('signup-form');
+        signUpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signUpForm.querySelector('input[type="email"]').value;
+            const password = signUpForm.querySelector('input[type="password"]').value;
+            
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    alert("Account Created! Please Login.");
+                    container.classList.remove("active");
+                })
+                .catch((error) => alert("Error: " + error.message));
+        });
+    </script>
 </body>
 </html>
-
-kar do isme dasbhboard wali file ka link add 
