@@ -2,156 +2,308 @@
 <html lang="en">
 
 <head>
-   
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Login & Register Form</title>
-    <head>
-        <title>My Unique Login App</title>
-        <meta name="description" content="Safe and secure login and registration system for everyone.">
-        <meta name="keywords" content="Login, Signup, Firebase, Web App, MyLoginApp">
-        <meta name="google-site-verification" content="iJYnk6gtN70zEC8bEmNtvYCD47HjauUctD2s3_cs4IE" />
-        
-        <link rel="stylesheet" href="style.css">
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunika Singh | Zenitsu Aesthetic Web</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            /* Yahan Zenitsu ki working image aur dark overlay hai */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
+                        url('https://wallpapercave.com/wp/wp5215682.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .vignette-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+            z-index: 10;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* Overlap Fix: Shuruat mein Registration hidden rahega */
+        .sign-in { left: 0; z-index: 2; opacity: 1; visibility: visible; }
+        .sign-up { left: 0; z-index: 1; opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Jab Register click ho (Active state) */
+        .container.active .sign-in { transform: translateX(100%); opacity: 0; visibility: hidden; pointer-events: none; }
+        .container.active .sign-up { transform: translateX(100%); opacity: 1; visibility: visible; z-index: 5; pointer-events: all; }
+
+        .container form {
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            height: 100%;
+            text-align: center;
+        }
+
+        .container h1 { color: #fff; margin-bottom: 15px; }
+        .container p { color: #eee; font-size: 14px; margin: 10px 0; }
+
+        .input-box { position: relative; width: 100%; margin: 8px 0; }
+        .input-box input {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 15px;
+            padding-right: 45px;
+            border-radius: 10px;
+            width: 100%;
+            outline: none;
+            color: #fff;
+        }
+
+        .input-box i { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; }
+        .input-box i.bx { right: 15px; }
+        #toggleLoginPassword, #toggleRegPassword { right: 40px; cursor: pointer; }
+
+        button {
+            background-color: #512da8;
+            color: #fff;
+            padding: 10px 45px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .toggle-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 0.6s ease-in-out;
+            z-index: 1000;
+        }
+
+        .container.active .toggle-container { transform: translateX(-100%); }
+
+        .toggle {
+            background: linear-gradient(to right, #5c41ac, #5c67f2);
+            color: #fff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .container.active .toggle { transform: translateX(50%); }
+
+        .toggle-panel {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 30px;
+            text-align: center;
+            top: 0;
+        }
+
+        .toggle-left { transform: translateX(-200%); }
+        .container.active .toggle-left { transform: translateX(0); }
+        .toggle-right { right: 0; }
+        .container.active .toggle-right { transform: translateX(200%); }
+
+        .social-icons a {
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            margin: 5px;
+            width: 35px;
+            height: 35px;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        a { color: #fff; text-decoration: none; font-size: 13px; margin: 10px 0; }
+    </style>
 </head>
-<script type="module">
-    // 1. Firebase ki zaroori cheezein mangwana
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    // 2. Aapka Firebase Configuration (Ise mat badalna)
-    const firebaseConfig = {
-        apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
-        authDomain: "myloginapp-2004.firebaseapp.com",
-        projectId: "myloginapp-2004",
-        storageBucket: "myloginapp-2004.firebasestorage.app",
-        messagingSenderId: "131970738070",
-        appId: "1:131970738070:web:f0f2ead47db9381cbadfb7",
-        measurementId: "G-DBLVKXJKLH"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // --- 3. UI Toggle Logic (Aapka Purana Code) ---
-    const container = document.getElementById('container');
-    const registerBtn = document.getElementById('register');
-    const loginBtn = document.getElementById('login');
-
-    registerBtn.addEventListener('click', () => {
-        container.classList.add("active");
-    });
-
-    loginBtn.addEventListener('click', () => {
-        container.classList.remove("active");
-    });
-
-    // --- 4. LOGIN LOGIC ---
-    const signInForm = document.querySelector('.sign-in form');
-    if (signInForm) {
-        signInForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // HTML mein jo naya email box banaya hai uski value lena
-            const email = signInForm.querySelector('input[type="email"]').value;
-            const password = signInForm.querySelector('input[type="password"]').value;
-
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    alert("Login Successful!");
-                    window.location.href = "dashboard.html"; // Naye page par bhejna
-                })
-                .catch((error) => {
-                    alert("Login Fail: " + error.message);
-                });
-        });
-    }
-
-    // --- 5. REGISTER LOGIC ---
-    const signUpForm = document.querySelector('.sign-up form');
-    if (signUpForm) {
-        signUpForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = signUpForm.querySelector('input[type="email"]').value;
-            const password = signUpForm.querySelector('input[type="password"]').value;
-
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    alert("Account Created! Now Login.");
-                    container.classList.remove("active"); // Wapis login page par le jana
-                })
-                .catch((error) => alert("Registration Error: " + error.message));
-        });
-    }
-</script>
 
 <body>
-    <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form>
-                <h1>Registration</h1>
-                <div class="input-box">
-                    <input type="text" placeholder="Username" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="email" placeholder="Email" required>
-                    <i class='bx bxs-envelope'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" required>
-                    <i class='bx bxs-lock-alt'></i>
-                </div>
-                <button type="submit">Register</button>
-                <p>or register with social platforms</p>
-                <div class="social-icons">
-                    <a href="#"><i class='bx bxl-google'></i></a>
-                    <a href="#"><i class='bx bxl-facebook'></i></a>
-                    <a href="#"><i class='bx bxl-github'></i></a>
-                    <a href="#"><i class='bx bxl-linkedin'></i></a>
-                </div>
-            </form>
-        </div>
+    <div class="vignette-overlay"></div>
 
-        <div class="form-container sign-in">
-            <form>
-                <h1>Login</h1>
-                <div class="input-box">
-                    <input type="email" placeholder="Username" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" required>
-                    <i class='bx bxs-lock-alt'></i>
-                </div>
-                <a href="#">Forgot Password?</a>
-                <button type="submit">Login</button>
-                <p>or login with social platforms</p>
-                <div class="social-icons">
-                    <a href="#"><i class='bx bxl-google'></i></a>
-                    <a href="#"><i class='bx bxl-facebook'></i></a>
-                    <a href="#"><i class='bx bxl-github'></i></a>
-                    <a href="#"><i class='bx bxl-linkedin'></i></a>
-                </div>
-            </form>
-        </div>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>Registration</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" required>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="reg-password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class="fa-solid fa-eye-slash" id="toggleRegPassword"></i>
+                </div>
+                <button type="submit">Register</button>
+                <p>or register with social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-google"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </form>
+        </div>
 
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Already have an account?</p>
-                    <button class="hidden" id="login">Login</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Hello, Welcome!</h1>
-                    <p>Don't have an account?</p>
-                    <button class="hidden" id="register">Register</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="java.js"></script>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Login</h1>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="login-password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                    <i class="fa-solid fa-eye-slash" id="toggleLoginPassword"></i>
+                </div>
+                <a href="#">Forgot Password?</a>
+                <button type="submit">Login</button>
+                <p>or login with social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-google"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </form>
+        </div>
+
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Already have an account?</p>
+                    <button id="login">Login</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Welcome!</h1>
+                    <p>Don't have an account?</p>
+                    <button id="register">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
+            authDomain: "myloginapp-2004.firebaseapp.com",
+            projectId: "myloginapp-2004",
+            storageBucket: "myloginapp-2004.firebasestorage.app",
+            messagingSenderId: "131970738070",
+            appId: "1:131970738070:web:f0f2ead47db9381cbadfb7",
+            measurementId: "G-DBLVKXJKLH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+
+        registerBtn.addEventListener('click', () => container.classList.add("active"));
+        loginBtn.addEventListener('click', () => container.classList.remove("active"));
+
+        function setupEyeIcon(buttonId, inputId) {
+            const btn = document.getElementById(buttonId);
+            const input = document.getElementById(inputId);
+            if(btn && input) {
+                btn.addEventListener('click', function() {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+        }
+        setupEyeIcon('toggleLoginPassword', 'login-password');
+        setupEyeIcon('toggleRegPassword', 'reg-password');
+
+        // Form logic remains the same...
+        const signInForm = document.querySelector('.sign-in form');
+        signInForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signInForm.querySelector('input[type="email"]').value;
+            const password = signInForm.querySelector('input[type="password"]').value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => { alert("Login Successful!"); })
+                .catch((error) => alert("Login Fail: " + error.message));
+        });
+
+        const signUpForm = document.querySelector('.sign-up form');
+        signUpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signUpForm.querySelector('input[type="email"]').value;
+            const password = signUpForm.querySelector('input[type="password"]').value;
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => { alert("Account Created!"); container.classList.remove("active"); })
+                .catch((error) => alert("Error: " + error.message));
+        });
+    </script>
 </body>
-
 </html>
