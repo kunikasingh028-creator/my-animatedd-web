@@ -9,8 +9,7 @@
 
 body {
     /* Zenitsu Background Fix - Working Link */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
-    url('https://wallpapercave.com/wp/wp5215682.jpg'); 
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -188,6 +187,7 @@ button {
     align-items: center;
     text-decoration: none;
 }
+
 
 
 
