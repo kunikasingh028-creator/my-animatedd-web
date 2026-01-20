@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +19,9 @@
         }
 
         body {
-            /* Yahan Zenitsu ki working image aur dark overlay hai */
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
-                        url('https://wallpapercave.com/wp/wp5215682.jpg'); 
+            /* Fix: Naya working Zenitsu image link aur linear gradient */
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), 
+                        url('https://images3.alphacoders.com/132/1323386.jpeg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -30,17 +29,11 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            width: 100vw;
             overflow: hidden;
         }
 
-        .vignette-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
+        /* Overlap Fix aur Glassmorphism */
         .container {
             background: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(20px);
@@ -50,10 +43,9 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
-            width: 768px;
+            width: 850px;
             max-width: 100%;
-            min-height: 480px;
-            z-index: 10;
+            min-height: 500px;
         }
 
         .form-container {
@@ -64,13 +56,12 @@
             transition: all 0.6s ease-in-out;
         }
 
-        /* Overlap Fix: Shuruat mein Registration hidden rahega */
+        /* Sign-in aur Sign-up ka overlap khatam karne ke liye */
         .sign-in { left: 0; z-index: 2; opacity: 1; visibility: visible; }
-        .sign-up { left: 0; z-index: 1; opacity: 0; visibility: hidden; pointer-events: none; }
+        .sign-up { left: 0; z-index: 1; opacity: 0; visibility: hidden; }
 
-        /* Jab Register click ho (Active state) */
-        .container.active .sign-in { transform: translateX(100%); opacity: 0; visibility: hidden; pointer-events: none; }
-        .container.active .sign-up { transform: translateX(100%); opacity: 1; visibility: visible; z-index: 5; pointer-events: all; }
+        .container.active .sign-in { transform: translateX(100%); opacity: 0; visibility: hidden; }
+        .container.active .sign-up { transform: translateX(100%); opacity: 1; visibility: visible; z-index: 5; }
 
         .container form {
             background: transparent;
@@ -83,13 +74,13 @@
             text-align: center;
         }
 
-        .container h1 { color: #fff; margin-bottom: 15px; }
-        .container p { color: #eee; font-size: 14px; margin: 10px 0; }
+        .container h1 { color: #fff; font-size: 28px; margin-bottom: 15px; }
+        .container p { color: #ddd; font-size: 14px; margin: 10px 0; }
 
-        .input-box { position: relative; width: 100%; margin: 8px 0; }
+        .input-box { position: relative; width: 100%; margin: 10px 0; }
         .input-box input {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 12px 15px;
             padding-right: 45px;
             border-radius: 10px;
@@ -100,19 +91,24 @@
 
         .input-box i { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; }
         .input-box i.bx { right: 15px; }
-        #toggleLoginPassword, #toggleRegPassword { right: 40px; cursor: pointer; }
+        .input-box .fa-eye-slash { right: 40px; cursor: pointer; }
 
         button {
-            background-color: #512da8;
+            background-color: #6a11cb;
             color: #fff;
             padding: 10px 45px;
             border-radius: 10px;
             border: none;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
+        button:hover { background-color: #2575fc; }
+
+        /* Side Panel Styling */
         .toggle-container {
             position: absolute;
             top: 0;
@@ -127,7 +123,7 @@
         .container.active .toggle-container { transform: translateX(-100%); }
 
         .toggle {
-            background: linear-gradient(to right, #5c41ac, #5c67f2);
+            background: linear-gradient(to right, #6a11cb, #2575fc);
             color: #fff;
             position: relative;
             left: -100%;
@@ -159,24 +155,24 @@
 
         .social-icons a {
             color: #fff;
-            border: 1px solid #fff;
+            border: 1px solid rgba(255,255,255,0.4);
             border-radius: 50%;
             display: inline-flex;
-            margin: 5px;
-            width: 35px;
-            height: 35px;
+            margin: 8px 5px;
+            width: 40px;
+            height: 40px;
             justify-content: center;
             align-items: center;
             text-decoration: none;
+            transition: 0.3s;
         }
+        .social-icons a:hover { background: rgba(255,255,255,0.2); }
         
         a { color: #fff; text-decoration: none; font-size: 13px; margin: 10px 0; }
     </style>
 </head>
 
 <body>
-    <div class="vignette-overlay"></div>
-
     <div class="container" id="container">
         <div class="form-container sign-up">
             <form>
@@ -192,15 +188,11 @@
                 <div class="input-box">
                     <input type="password" placeholder="Password" id="reg-password" required>
                     <i class='bx bxs-lock-alt'></i>
-                    <i class="fa-solid fa-eye-slash" id="toggleRegPassword"></i>
                 </div>
                 <button type="submit">Register</button>
-                <p>or register with social platforms</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#"><i class="fa-brands fa-google"></i></a>
-                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
             </form>
         </div>
@@ -215,16 +207,12 @@
                 <div class="input-box">
                     <input type="password" placeholder="Password" id="login-password" required>
                     <i class='bx bxs-lock-alt'></i>
-                    <i class="fa-solid fa-eye-slash" id="toggleLoginPassword"></i>
                 </div>
                 <a href="#">Forgot Password?</a>
                 <button type="submit">Login</button>
-                <p>or login with social platforms</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#"><i class="fa-brands fa-google"></i></a>
-                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
             </form>
         </div>
@@ -233,77 +221,25 @@
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
                     <h1>Welcome Back!</h1>
-                    <p>Already have an account?</p>
+                    <p>Enter your details to stay connected</p>
                     <button id="login">Login</button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Hello, Welcome!</h1>
-                    <p>Don't have an account?</p>
+                    <p>Start your journey with us today</p>
                     <button id="register">Register</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
-            authDomain: "myloginapp-2004.firebaseapp.com",
-            projectId: "myloginapp-2004",
-            storageBucket: "myloginapp-2004.firebasestorage.app",
-            messagingSenderId: "131970738070",
-            appId: "1:131970738070:web:f0f2ead47db9381cbadfb7",
-            measurementId: "G-DBLVKXJKLH"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
+    <script>
         const container = document.getElementById('container');
         const registerBtn = document.getElementById('register');
         const loginBtn = document.getElementById('login');
 
         registerBtn.addEventListener('click', () => container.classList.add("active"));
         loginBtn.addEventListener('click', () => container.classList.remove("active"));
-
-        function setupEyeIcon(buttonId, inputId) {
-            const btn = document.getElementById(buttonId);
-            const input = document.getElementById(inputId);
-            if(btn && input) {
-                btn.addEventListener('click', function() {
-                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                    input.setAttribute('type', type);
-                    this.classList.toggle('fa-eye');
-                    this.classList.toggle('fa-eye-slash');
-                });
-            }
-        }
-        setupEyeIcon('toggleLoginPassword', 'login-password');
-        setupEyeIcon('toggleRegPassword', 'reg-password');
-
-        // Form logic remains the same...
-        const signInForm = document.querySelector('.sign-in form');
-        signInForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = signInForm.querySelector('input[type="email"]').value;
-            const password = signInForm.querySelector('input[type="password"]').value;
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => { alert("Login Successful!"); })
-                .catch((error) => alert("Login Fail: " + error.message));
-        });
-
-        const signUpForm = document.querySelector('.sign-up form');
-        signUpForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = signUpForm.querySelector('input[type="email"]').value;
-            const password = signUpForm.querySelector('input[type="password"]').value;
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(() => { alert("Account Created!"); container.classList.remove("active"); })
-                .catch((error) => alert("Error: " + error.message));
-        });
     </script>
 </body>
 </html>
