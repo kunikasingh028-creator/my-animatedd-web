@@ -9,11 +9,11 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="dashboart.html">
 </head>
 
 <body>
     <div class="vignette-overlay"></div>
+    
     <div class="container" id="container">
         <div class="form-container sign-up">
             <form id="signup-form">
@@ -92,6 +92,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
+        // UI Controls (Login/Register Switch)
         const container = document.getElementById('container');
         const registerBtn = document.getElementById('register');
         const loginBtn = document.getElementById('login');
@@ -99,7 +100,21 @@
         registerBtn.addEventListener('click', () => container.classList.add("active"));
         loginBtn.addEventListener('click', () => container.classList.remove("active"));
 
-        // Login Logic with Dashboard Link
+        // Eye Icon Password Toggle (Functionality)
+        function togglePassword(eyeId, inputId) {
+            const eye = document.getElementById(eyeId);
+            const input = document.getElementById(inputId);
+            eye.addEventListener('click', () => {
+                const type = input.type === 'password' ? 'text' : 'password';
+                input.type = type;
+                eye.classList.toggle('fa-eye');
+                eye.classList.toggle('fa-eye-slash');
+            });
+        }
+        togglePassword('toggleLoginPassword', 'login-password');
+        togglePassword('toggleRegPassword', 'reg-password');
+
+        // --- DASHBOARD REDIRECTION LOGIC ---
         const signInForm = document.getElementById('signin-form');
         signInForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -109,11 +124,24 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => { 
                     alert("Login Success! Opening Dashboard...");
-                    window.location.href = "dashboard.html"; // <-- Link to your file
+                    window.location.href = "dashboard.html"; // Redirection Link
                 })
                 .catch((error) => alert("Login Fail: " + error.message));
+        });
+
+        // Registration Logic
+        const signUpForm = document.getElementById('signup-form');
+        signUpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signUpForm.querySelector('input[type="email"]').value;
+            const password = signUpForm.querySelector('input[type="password"]').value;
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    alert("Account Created Successfully!");
+                    container.classList.remove("active");
+                })
+                .catch((error) => alert("Registration Error: " + error.message));
         });
     </script>
 </body>
 </html>
-
