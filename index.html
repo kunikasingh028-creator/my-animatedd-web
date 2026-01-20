@@ -6,13 +6,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kunika Singh | Zenitsu Aesthetic Web</title>
     
-    <meta name="title" content="Kunika Singh | Professional Animated Web">
-    <meta name="description" content="Welcome to Kunika Singh's official portal. This is a modern animated login and registration system.">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
-<link rel="stylesheet" href="style.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            /* Yahan Zenitsu ki working image aur dark overlay hai */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
+                        url('https://wallpapercave.com/wp/wp5215682.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .vignette-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+            z-index: 10;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* Overlap Fix: Shuruat mein Registration hidden rahega */
+        .sign-in { left: 0; z-index: 2; opacity: 1; visibility: visible; }
+        .sign-up { left: 0; z-index: 1; opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Jab Register click ho (Active state) */
+        .container.active .sign-in { transform: translateX(100%); opacity: 0; visibility: hidden; pointer-events: none; }
+        .container.active .sign-up { transform: translateX(100%); opacity: 1; visibility: visible; z-index: 5; pointer-events: all; }
+
+        .container form {
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            height: 100%;
+            text-align: center;
+        }
+
+        .container h1 { color: #fff; margin-bottom: 15px; }
+        .container p { color: #eee; font-size: 14px; margin: 10px 0; }
+
+        .input-box { position: relative; width: 100%; margin: 8px 0; }
+        .input-box input {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 15px;
+            padding-right: 45px;
+            border-radius: 10px;
+            width: 100%;
+            outline: none;
+            color: #fff;
+        }
+
+        .input-box i { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; }
+        .input-box i.bx { right: 15px; }
+        #toggleLoginPassword, #toggleRegPassword { right: 40px; cursor: pointer; }
+
+        button {
+            background-color: #512da8;
+            color: #fff;
+            padding: 10px 45px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .toggle-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 0.6s ease-in-out;
+            z-index: 1000;
+        }
+
+        .container.active .toggle-container { transform: translateX(-100%); }
+
+        .toggle {
+            background: linear-gradient(to right, #5c41ac, #5c67f2);
+            color: #fff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .container.active .toggle { transform: translateX(50%); }
+
+        .toggle-panel {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 30px;
+            text-align: center;
+            top: 0;
+        }
+
+        .toggle-left { transform: translateX(-200%); }
+        .container.active .toggle-left { transform: translateX(0); }
+        .toggle-right { right: 0; }
+        .container.active .toggle-right { transform: translateX(200%); }
+
+        .social-icons a {
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            margin: 5px;
+            width: 35px;
+            height: 35px;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        a { color: #fff; text-decoration: none; font-size: 13px; margin: 10px 0; }
+    </style>
 </head>
 
 <body>
@@ -75,12 +234,12 @@
                 <div class="toggle-panel toggle-left">
                     <h1>Welcome Back!</h1>
                     <p>Already have an account?</p>
-                    <button class="hidden" id="login">Login</button>
+                    <button id="login">Login</button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Hello, Welcome!</h1>
                     <p>Don't have an account?</p>
-                    <button class="hidden" id="register">Register</button>
+                    <button id="register">Register</button>
                 </div>
             </div>
         </div>
@@ -125,13 +284,14 @@
         setupEyeIcon('toggleLoginPassword', 'login-password');
         setupEyeIcon('toggleRegPassword', 'reg-password');
 
+        // Form logic remains the same...
         const signInForm = document.querySelector('.sign-in form');
         signInForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const email = signInForm.querySelector('input[type="email"]').value;
             const password = signInForm.querySelector('input[type="password"]').value;
             signInWithEmailAndPassword(auth, email, password)
-                .then(() => { alert("Login Successful!"); window.location.href = "dashboard.html"; })
+                .then(() => { alert("Login Successful!"); })
                 .catch((error) => alert("Login Fail: " + error.message));
         });
 
@@ -141,12 +301,9 @@
             const email = signUpForm.querySelector('input[type="email"]').value;
             const password = signUpForm.querySelector('input[type="password"]').value;
             createUserWithEmailAndPassword(auth, email, password)
-                .then(() => { alert("Account Created! Now Login."); container.classList.remove("active"); })
-                .catch((error) => alert("Registration Error: " + error.message));
+                .then(() => { alert("Account Created!"); container.classList.remove("active"); })
+                .catch((error) => alert("Error: " + error.message));
         });
     </script>
 </body>
 </html>
-
-
-
