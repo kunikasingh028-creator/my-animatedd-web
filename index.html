@@ -3,60 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunika Singh | Zenitsu Login</title>
+    <title>Kunika Singh | Zenitsu Login & Register</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://wallpapercave.com/wp/wp5215682.jpg'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            min-height: 480px;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* --- DONO FORMS KI SETTING --- */
+        .sign-in { left: 0; z-index: 2; }
+        .sign-up { left: 0; opacity: 0; z-index: 1; }
+
+        /* Jab 'active' class add hogi tab switch hoga */
+        .container.active .sign-in { transform: translateX(100%); opacity: 0; z-index: 1; }
+        .container.active .sign-up { transform: translateX(100%); opacity: 1; z-index: 5; }
+
+        .container form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            height: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        .input-box { position: relative; width: 100%; margin: 8px 0; }
+        .input-box input {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 15px;
+            border-radius: 10px;
+            width: 100%;
+            color: #fff;
+            outline: none;
+        }
+
+        button {
+            background-color: #512da8;
+            color: #fff;
+            padding: 10px 45px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 0.6s ease-in-out;
+            z-index: 1000;
+        }
+
+        .container.active .toggle-container { transform: translateX(-100%); }
+
+        .toggle {
+            background: linear-gradient(to right, #5c41ac, #5c67f2);
+            color: #fff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .container.active .toggle { transform: translateX(50%); }
+
+        .toggle-panel {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 30px;
+            text-align: center;
+            top: 0;
+        }
+
+        .toggle-left { transform: translateX(-200%); }
+        .container.active .toggle-left { transform: translateX(0); }
+        .toggle-right { right: 0; }
+        .container.active .toggle-right { transform: translateX(200%); }
+
+        .social-icons a {
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            margin: 10px 5px;
+            width: 35px;
+            height: 35px;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="vignette-overlay"></div>
     <div class="container" id="container">
-        
         <div class="form-container sign-up">
             <form id="signup-form">
                 <h1>Registration</h1>
-                <div class="input-box">
-                    <input type="text" placeholder="Username" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="email" placeholder="Email" required>
-                    <i class='bx bxs-envelope'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" id="reg-password" required>
-                    <i class='bx bxs-lock-alt'></i>
-                    <i class="fa-solid fa-eye-slash" id="toggleRegPassword"></i>
-                </div>
-                <button type="submit">Register</button>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-google"></i></a>
                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
+                <span>or use email for registration</span>
+                <div class="input-box"><input type="text" placeholder="Username" required></div>
+                <div class="input-box"><input type="email" placeholder="Email" required></div>
+                <div class="input-box"><input type="password" placeholder="Password" required></div>
+                <button type="submit">Register</button>
             </form>
         </div>
 
         <div class="form-container sign-in">
             <form id="signin-form">
                 <h1>Login</h1>
-                <div class="input-box">
-                    <input type="email" placeholder="Email" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" id="login-password" required>
-                    <i class='bx bxs-lock-alt'></i>
-                    <i class="fa-solid fa-eye-slash" id="toggleLoginPassword"></i>
-                </div>
-                <a href="#">Forgot Password?</a>
-                <button type="submit">Login</button>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-google"></i></a>
                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
+                <span>or use your account</span>
+                <div class="input-box"><input type="email" placeholder="Email" required></div>
+                <div class="input-box"><input type="password" placeholder="Password" required></div>
+                <a href="#" style="color:white; font-size:12px; margin: 10px 0;">Forgot Password?</a>
+                <button type="submit">Login</button>
             </form>
         </div>
 
@@ -64,12 +178,12 @@
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
                     <h1>Welcome Back!</h1>
-                    <p>Log in to access your dashboard.</p>
+                    <p>Enter your details to login</p>
                     <button id="login">Login</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello!</h1>
-                    <p>New here? Register to get started.</p>
+                    <h1>Hello, Friend!</h1>
+                    <p>Register with us to start journey</p>
                     <button id="register">Register</button>
                 </div>
             </div>
@@ -78,7 +192,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDZCwGAMDiJiS8AJ9OA4OWbRYG6u7o0iUE",
@@ -96,16 +210,11 @@
         const registerBtn = document.getElementById('register');
         const loginBtn = document.getElementById('login');
 
-        // Page Switch Logic
-        registerBtn.addEventListener('click', () => {
-            container.classList.add("active");
-        });
+        // Switch Forms
+        registerBtn.addEventListener('click', () => container.classList.add("active"));
+        loginBtn.addEventListener('click', () => container.classList.remove("active"));
 
-        loginBtn.addEventListener('click', () => {
-            container.classList.remove("active");
-        });
-
-        // Login Logic with Dashboard Link
+        // Login + Redirection to Dashboard
         const signInForm = document.getElementById('signin-form');
         signInForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -114,25 +223,21 @@
             
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => { 
-                    alert("Login Success! Opening Dashboard...");
-                    window.location.href = "dashboard.html"; // <-- Yahan link hai
+                    alert("Login Success!"); 
+                    window.location.href = "dashboard.html"; // <-- Link connected!
                 })
-                .catch((error) => alert("Login Fail: " + error.message));
+                .catch((error) => alert(error.message));
         });
 
-        // Registration Logic
+        // Signup Logic
         const signUpForm = document.getElementById('signup-form');
         signUpForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const email = signUpForm.querySelector('input[type="email"]').value;
             const password = signUpForm.querySelector('input[type="password"]').value;
-            
             createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    alert("Account Created! Please Login.");
-                    container.classList.remove("active");
-                })
-                .catch((error) => alert("Error: " + error.message));
+                .then(() => { alert("Account Created!"); container.classList.remove("active"); })
+                .catch((error) => alert(error.message));
         });
     </script>
 </body>
