@@ -8,9 +8,9 @@
 }
 
 body {
-    /* Is link ko check karein, ye stable hai */
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url('https://wallpaperaccess.com/full/1154563.jpg'); 
+    /* Zenitsu Background Fix - Working Link */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
+                url('https://wallpapercave.com/wp/wp5215682.jpg'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,14 +19,13 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
     overflow: hidden;
 }
 
 .container {
     background: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 30px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
@@ -35,37 +34,42 @@ body {
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    z-index: 10;
 }
 
 .form-container {
     position: absolute;
     top: 0;
     height: 100%;
+    width: 50%; /* Har form container sirf aadhi width lega */
     transition: all 0.6s ease-in-out;
 }
 
 /* --- OVERLAP FIX START --- */
+
+/* Login form shuruat mein dikhega */
 .sign-in {
     left: 0;
-    width: 50%;
     z-index: 2;
     opacity: 1;
     visibility: visible;
 }
 
+/* Registration form shuruat mein hidden rahega */
 .sign-up {
     left: 0;
-    width: 50%;
     z-index: 1;
     opacity: 0;
-    visibility: hidden; /* Ye line overlap rokegi */
+    visibility: hidden;
+    pointer-events: none;
 }
 
-/* Active State (Jab Register dabayein) */
+/* Jab 'active' class add ho (Register click karne par) */
 .container.active .sign-in {
     transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .container.active .sign-up {
@@ -73,7 +77,9 @@ body {
     opacity: 1;
     visibility: visible;
     z-index: 5;
+    pointer-events: all;
 }
+
 /* --- OVERLAP FIX END --- */
 
 .container form {
@@ -86,7 +92,7 @@ body {
     height: 100%;
 }
 
-.container h1 { color: #fff; font-size: 24px; margin-bottom: 15px; }
+.container h1 { color: #fff; margin-bottom: 15px; }
 
 .input-box {
     position: relative;
@@ -124,10 +130,7 @@ button {
     font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
-    transition: 0.3s;
 }
-
-button:hover { background-color: #6a42d1; }
 
 .toggle-container {
     position: absolute;
@@ -168,9 +171,10 @@ button:hover { background-color: #6a42d1; }
     top: 0;
 }
 
-.toggle-right { right: 0; }
 .toggle-left { transform: translateX(-200%); }
 .container.active .toggle-left { transform: translateX(0); }
+.toggle-right { right: 0; }
+.container.active .toggle-right { transform: translateX(200%); }
 
 .social-icons a {
     color: #fff;
